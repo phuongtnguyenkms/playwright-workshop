@@ -1,0 +1,28 @@
+{
+  "name": "playwright-workshop",
+  "version": "1.0.0",
+  "description": "Playwright Workshop for QA — KMS QC Guild course repo",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "prework": "playwright test --config prework/playwright.config.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "selfcheck": "node scripts/selfcheck.mjs"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^22.20.5",
+    "dotenv": "^18.0.10",
+    "eslint": "^9.39.5",
+    "eslint-plugin-playwright": "^2.12.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.73.0"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}
