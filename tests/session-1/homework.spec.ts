@@ -70,7 +70,12 @@ test.describe('Session 1 homework', () => {
     await expect(page.getByRole('heading', { level: 5 })).not.toHaveCount(0);
 
     await page.getByRole('textbox', { name: 'Search' }).fill('long nose');
+    const searchResponsePromise = page.waitForResponse((response) =>
+      response.url().endsWith('/api/products/search'),
+    );
     await page.getByRole('button', { name: 'Search', exact: true }).click();
+    const searchResponse = await searchResponsePromise;
+    expect(searchResponse.ok(), 'Product search request should succeed').toBe(true);
     await expect(page.getByTestId('search-result-count')).toHaveText("1 product found for 'long nose'");
     await expect(page.getByRole('link', { name: /Long Nose Pliers/ })).toContainText('Out of stock');
 
