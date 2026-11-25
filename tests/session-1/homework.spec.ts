@@ -90,11 +90,15 @@ test.describe('Session 1 homework', () => {
 
   test('TC-04 filtering by Drill and sorting by price lists the drills cheapest first', async ({ page }) => {
     await page.goto('/');
+    const products = page.getByRole('heading', { level: 5 });
+    await expect(products).not.toHaveCount(0);
+
     await page.getByRole('checkbox', { name: 'Drill', exact: true }).check();
+    await expect(products).toHaveCount(2);
     await page.getByRole('combobox', { name: 'sort' }).selectOption({ label: 'Price (Low - High)' });
 
     // Exactly two products are listed, cheapest first. toHaveText with an array checks both the count and the order.
-    await expect(page.getByRole('heading', { level: 5 })).toHaveText([
+    await expect(products).toHaveText([
       'Cordless Drill 12V',
       'Cordless Drill 24V',
     ]);
